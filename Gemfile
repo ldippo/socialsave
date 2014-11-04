@@ -16,16 +16,19 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'thin'
+gem 'figaro'
+gem 'omniauth-facebook'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'pry' 
+  gem 'faker'
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'sqlite3'
 end
