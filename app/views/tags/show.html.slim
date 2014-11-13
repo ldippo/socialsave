@@ -1,0 +1,8 @@
+h1 
+	= @tag.name
+ul
+	- @tag.bookmarks.each do |bookmark|
+		li
+			= link_to bookmark.url, bookmark.url, rel: "nofollow"
+
+

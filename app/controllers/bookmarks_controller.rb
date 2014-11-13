@@ -1,8 +1,9 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
+  before_action :authenticate_user!
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = current_user.bookmarks
     respond_with(@bookmarks)
   end
 
@@ -20,6 +21,9 @@ class BookmarksController < ApplicationController
 
   def create
     @bookmark = Bookmark.new(bookmark_params)
+    @bookmark.user = current_user
+    tag_names = params[:bookmark][:tags].split(',').map(&:strip)
+    @bookmark.tags = tag_names.map{|n| Tag.where(name: n ).first_or_create} 
     flash[:notice] = 'Bookmark was successfully created.' if @bookmark.save
     respond_with(@bookmark)
   end
@@ -41,5 +45,6 @@ class BookmarksController < ApplicationController
 
     def bookmark_params
       params.require(:bookmark).permit(:url)
+
     end
 end
