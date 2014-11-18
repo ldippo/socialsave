@@ -26,6 +26,7 @@ class BookmarksController < ApplicationController
     @bookmark.tags = tag_names.map{|n| Tag.where(name: n ).first_or_create} 
     flash[:notice] = 'Bookmark was successfully created.' if @bookmark.save
     respond_with(@bookmark)
+    NewBookmarkEmail.new_bookmark_email(@bookmark).deliver
   end
 
   def update
