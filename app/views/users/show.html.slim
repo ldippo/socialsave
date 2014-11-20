@@ -1,0 +1,10 @@
+h3 User
+p 
+	| Name: 
+	= @user.name if @user.name
+p 
+	| Email: 
+	= @user.email if @user.email
+ul
+	- current_user.bookmarks.each do |b|
+		li = link_to b.url, b.url
