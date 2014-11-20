@@ -7,4 +7,4 @@ p
 	= @user.email if @user.email
 ul
 	- current_user.bookmarks.each do |b|
-		li = link_to b.url, b.url
+		li= link_to b.url, b.url
